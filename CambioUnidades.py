@@ -1,5 +1,5 @@
 #Se van a convertir algunas unidades como Volumen, Temperatura, Velocidades, Areas, Peso y Longitudes
-def conversion(unidad, cambio, valor):
+def conversion(seleccion, unidad, cambio, valor):
     conversiones = {
         'longitudes': {
             'kilometros': {
@@ -37,7 +37,7 @@ def conversion(unidad, cambio, valor):
                 'libras': 0.0625
             }
         },
-        'volumen': {
+        'volumenes': {
             'litros': {
                 'galones': 0.264172,
                 'onzas liquidas': 33.814
@@ -51,7 +51,7 @@ def conversion(unidad, cambio, valor):
                 'galones': 0.0078125
             }
         },
-        'temperatura': {
+        'temperaturas': {
             'kelvin': {
                 'celcius': lambda x: x - 273.15,
                 'fahrenheit': lambda x: x * 9/5 - 459.67
@@ -65,7 +65,7 @@ def conversion(unidad, cambio, valor):
                 'celcius': lambda x: (x - 32) * 5/9
             }
         },
-        'area': {
+        'areas': {
             'metros cuadrados': {
                 'pies cuadrados': 10.7639,
                 'acres': 0.000247105
@@ -79,7 +79,7 @@ def conversion(unidad, cambio, valor):
                 'pies cuadrados': 43560
             }
         },
-        'velocidad': {
+        'velocidades': {
             'kilometro hora': {
                 'pies hora': 3280.84,
                 'millas hora': 0.621371
@@ -95,20 +95,20 @@ def conversion(unidad, cambio, valor):
         }
     }
 
-    if callable(conversiones[unidad][cambio]):
-        calculo = conversiones[unidad][cambio]
+    if callable(conversiones[seleccion][unidad][cambio]):
+        calculo = conversiones[seleccion][unidad][cambio]
     else:
-        calculo = valor * conversiones[unidad][cambio]
+        calculo = valor * conversiones[seleccion][unidad][cambio]
     return round(calculo, 5)
 
 def unidades(tipounidad):
     # Todas las unidades
     unidad = {'longitudes': ['millas','pies', 'kilometros', 'pulgadas'],
               'pesos': ['kilogramos', 'libras', 'onzas'],
-              'volumen': ['litos', 'galones', 'onzas liquidas'],
-              'temperatura': ['kelvin', 'celcius', 'fahrenheit'],
-              'area': ['metros cuadrados', 'pies cuadrados','acres'],
-              'velocidad': ['kilometro hora', 'pies hora', 'millas hora']}
+              'volumenes': ['litros', 'galones', 'onzas liquidas'],
+              'temperaturas': ['kelvin', 'celcius', 'fahrenheit'],
+              'areas': ['metros cuadrados', 'pies cuadrados','acres'],
+              'velocidades': ['kilometro hora', 'pies hora', 'millas hora']}
     #Bucle con para guardar todas las unidades en la lista
     lista_unidades = []
 
@@ -150,7 +150,7 @@ while True:
         unidades_cambio = unidades(seleccion.lower())  # Obtenemos las unidades de cambio
         unidad, cambio = PedirUnidades(unidades_cambio)  # Pedimos al usuario que elija las unidades
         valor = float(input(f'\nQue valor de {unidad} quieres convertir: '))  # Pedimos al usuario que ingrese el valor a convertir
-        solucion = conversion(unidad, cambio, valor)  # Realizamos la conversión
+        solucion = conversion(seleccion, unidad, cambio, valor)  # Realizamos la conversión
         print(f'\nEl nuevo valor de tus unidades es: {solucion}\n')  # Mostramos el resultado
 
     else:
