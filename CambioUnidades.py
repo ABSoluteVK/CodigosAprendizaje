@@ -1,3 +1,4 @@
+from tkinter import *
 #Se van a convertir algunas unidades como Volumen, Temperatura, Velocidades, Areas, Peso y Longitudes
 def conversion(seleccion, unidad, cambio, valor):
     conversiones = {
@@ -135,6 +136,7 @@ def PedirUnidades(lista):
     return unidad, cambio
 #Bucle programa principal 
 
+"""
 while True:
     print('CONVERTIDOR DE UNIDADES'.center(31,'-'))
 
@@ -157,3 +159,27 @@ while True:
 
     else:
         print('\nPor favor, introduce una respuesta valida\n')
+"""
+
+ventana = Tk()
+ventana.title("CONVERSION DE UNIDADES")
+
+ancho = 550
+alto = 450
+
+ancho_pantalla = ventana.winfo_screenwidth()
+alto_pantalla = ventana.winfo_screenheight()
+
+x = (ancho_pantalla // 2) - (ancho // 2)
+y = (alto_pantalla // 2) - (alto // 2)
+
+ventana.geometry(f'{ancho}x{alto}+{x}+{y}')
+
+ventana.resizable(0, 0)
+
+ventana.config(background='silver')
+
+frame = Frame(ventana)
+BDesplegable = Radiobutton(frame, text="Unidades a elegir: ")
+
+ventana.mainloop()
