@@ -53,16 +53,16 @@ def conversion(seleccion, unidad, cambio, valor):
         },
         'temperaturas': {
             'kelvin': {
-                'celcius': lambda x: x - 273.15,
-                'fahrenheit': lambda x: x * 9/5 - 459.67
+                'celcius': lambda x: round(x - 273.15),
+                'fahrenheit': lambda x: round(x * 9/5 - 459.67)
             },
             'celcius': {
-                'kelvin': lambda x: x + 273.15,
-                'fahrenheit': lambda x: x * 9/5 + 32
+                'kelvin': lambda x: round(x + 273.15),
+                'fahrenheit': lambda x: round(x * 9/5 + 32)
             },
             'fahrenheit': {
-                'kelvin': lambda x: (x + 459.67) * 5/9,
-                'celcius': lambda x: (x - 32) * 5/9
+                'kelvin': lambda x: round((x + 459.67) * 5/9),
+                'celcius': lambda x: round((x - 32) * 5/9)
             }
         },
         'areas': {
@@ -97,9 +97,11 @@ def conversion(seleccion, unidad, cambio, valor):
 
     if callable(conversiones[seleccion][unidad][cambio]):
         calculo = conversiones[seleccion][unidad][cambio]
+        return calculo(valor)
     else:
         calculo = valor * conversiones[seleccion][unidad][cambio]
-    return round(calculo, 5)
+        calculo = round(calculo, 5)
+        return calculo
 
 def unidades(tipounidad):
     # Todas las unidades
