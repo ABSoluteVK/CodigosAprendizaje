@@ -60,3 +60,4 @@ elif Dificultad == 3:
     Juego(10, 1, 10000)
 elif Dificultad == 4:
     Juego(3, 1, 100)
+input('Presiona cualquier tecla para salir!')
